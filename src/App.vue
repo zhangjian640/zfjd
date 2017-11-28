@@ -4,7 +4,6 @@
       <g-left></g-left>
     </div>
     <div class="grid-center">
-      <g-header></g-header>
       <g-center></g-center>
     </div>
     <div class="grid-right">
@@ -15,7 +14,6 @@
 
 <script>
   import GLeft from 'components/g-left/g-left'
-  import GHeader from 'components/g-header/g-header'
   import GCenter from 'components/g-center/g-center'
   import GRight from 'components/g-right/g-right'
 
@@ -23,7 +21,6 @@
     name: 'app',
     components: {
       GLeft,
-      GHeader,
       GCenter,
       GRight
     }

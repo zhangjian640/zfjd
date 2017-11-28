@@ -1,5 +1,5 @@
 <template>
-  <div class="content" @mouseover="overShow" @mouseout="outHide">
+  <div class="content" @mouseenter="overShow" @mouseleave="outHide">
     <div class="cube__wrapper">
       <input type="radio" id="1" name="cube" checked="true" class="cube__control"/>
       <input type="radio" id="2" name="cube" class="cube__control"/>
@@ -11,36 +11,36 @@
         <div class="cube__panel">
           <div v-if="!scaled" class="title">接处警及受立案</div>
           <ul v-else-if="scaled">
-            <li>{{allData.cases.name}}</li>
-            <li v-for="(item, index) in allData.cases.list" :key="index">{{item.title}} {{item.count}}</li>
+            <li>{{allData[0].name}}</li>
+            <li v-for="(item, index) in allData[0].list" :key="index">{{item.title}} {{item.count}}</li>
           </ul>
         </div>
         <div class="cube__panel">
           <div v-if="!scaled" class="title">刑事强制措施</div>
           <ul v-else-if="scaled">
-            <li>{{allData.criminal.name}}</li>
-            <li v-for="(item, index) in allData.criminal.list" :key="index">{{item.title}} {{item.count}}</li>
+            <li>{{allData[1].name}}</li>
+            <li v-for="(item, index) in allData[1].list" :key="index">{{item.title}} {{item.count}}</li>
           </ul>
         </div>
         <div class="cube__panel">
           <div v-if="!scaled" class="title">强制措施</div>
           <ul v-else-if="scaled">
-            <li>{{allData.detention.name}}</li>
-            <li v-for="(item, index) in allData.detention.list" :key="index">{{item.title}} {{item.count}}</li>
+            <li>{{allData[2].name}}</li>
+            <li v-for="(item, index) in allData[2].list" :key="index">{{item.title}} {{item.count}}</li>
           </ul>
         </div>
         <div class="cube__panel">
           <div v-if="!scaled" class="title">移送起诉</div>
           <ul v-else-if="scaled">
-            <li>{{allData.sue.name}}</li>
-            <li v-for="(item, index) in allData.sue.list" :key="index">{{item.title}} {{item.count}}</li>
+            <li>{{allData[3].name}}</li>
+            <li v-for="(item, index) in allData[3].list" :key="index">{{item.title}} {{item.count}}</li>
           </ul>
         </div>
         <div class="cube__panel">
           <div v-if="!scaled" class="title">行政处罚罚款</div>
           <ul v-else-if="scaled">
-            <li>{{allData.trial.name}}</li>
-            <li v-for="(item, index) in allData.trial.list" :key="index">{{item.title}} {{item.count}}</li>
+            <li>{{allData[4].name}}</li>
+            <li v-for="(item, index) in allData[4].list" :key="index">{{item.title}} {{item.count}}</li>
           </ul>
         </div>
         <div class="cube__panel">
@@ -48,20 +48,20 @@
         </div>
       </div>
       <div class="cube__actions--left">
-        <label for="6" class="cube__action"></label>
-        <label for="1" class="cube__action"></label>
-        <label for="2" class="cube__action"></label>
-        <label for="3" class="cube__action"></label>
-        <label for="4" class="cube__action"></label>
-        <label for="5" class="cube__action"></label>
+        <label for="6" class="cube__action" @click="toggleFace(6)"></label>
+        <label for="1" class="cube__action" @click="toggleFace(1)"></label>
+        <label for="2" class="cube__action" @click="toggleFace(2)"></label>
+        <label for="3" class="cube__action" @click="toggleFace(3)"></label>
+        <label for="4" class="cube__action" @click="toggleFace(4)"></label>
+        <label for="5" class="cube__action" @click="toggleFace(5)"></label>
       </div>
       <div class="cube__actions--right">
-        <label for="2" class="cube__action"></label>
-        <label for="3" class="cube__action"></label>
-        <label for="4" class="cube__action"></label>
-        <label for="5" class="cube__action"></label>
-        <label for="6" class="cube__action"></label>
-        <label for="1" class="cube__action"></label>
+        <label for="2" class="cube__action" @click="toggleFace(2)"></label>
+        <label for="3" class="cube__action" @click="toggleFace(3)"></label>
+        <label for="4" class="cube__action" @click="toggleFace(4)"></label>
+        <label for="5" class="cube__action" @click="toggleFace(5)"></label>
+        <label for="6" class="cube__action" @click="toggleFace(6)"></label>
+        <label for="1" class="cube__action" @click="toggleFace(1)"></label>
       </div>
       <!--<div class="cube__indicators">-->
         <!--<label for="1" class="cube__indicator"></label>-->
@@ -79,7 +79,7 @@
   export default {
     props: {
       'allData': {
-        type: Object
+        type: Array
       }
     },
     data () {
@@ -95,6 +95,17 @@
       outHide () {
         this.scaled = false
         this.$emit('change-scale', this.scaled)
+      },
+      /**
+       * 切面立方体六个面
+       * @param index 当前是哪个面
+       * 返回的面数作为数组的下标，返回值减1
+       */
+      toggleFace (index) {
+        if (index === 6) {
+          return
+        }
+        this.$emit('toggle-face', index - 1)
       }
     }
   }

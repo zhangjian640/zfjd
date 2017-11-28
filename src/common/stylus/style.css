@@ -1,0 +1,12 @@
+@font-face {
+	font-family: 'DS-DIGIB';
+	src: url("fonts/DS-DIGIB.eot?#iefix") format("embedded-opentype"),
+		url("fonts/DS-DIGIB.TTF") format("truetype");
+	font-weight: normal;
+	font-style: normal
+}
+
+.num, .areaPercent,.numbers,.number1 {
+	font-family: "DS-DIGIB", sans-serif;
+	vertical-align: middle;
+}

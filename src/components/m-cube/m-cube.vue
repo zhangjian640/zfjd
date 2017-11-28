@@ -1,27 +1,28 @@
 <template>
   <div class="data">
     <div class="cube">
-      <cube @change-scale="onChangeScale" :all-data="realData"></cube>
+      <cube @change-scale="onChangeScale" @toggle-face="onToggleFace" :all-data="realData"></cube>
       <transition name="slide-fade">
         <div class="data-default" v-show="showDefaultTable">
-          <ul class="data-cases">
-            <li>{{realData.cases.name}}</li>
-            <li v-for="(item, index) in realData.cases.list" :key="index">{{item.title}} {{item.count}}</li>
-          </ul>
+          <div class="data-cases">
+            <div class="cases-title">{{realData[0].name}}</div>
+            <div class="item" v-for="(item, index) in realData[0].list" :key="index">
+              <div class="title">{{item.title}}</div>
+              <div class="progress">
+                <div class="fill"></div>
+              </div>
+              <div class="count num">{{item.count}}</div>
+            </div>
+          </div>
         </div>
       </transition>
     </div>
     <div class="all-problem">
       <div class="name">总问题数</div>
       <div class="progress">
-        <div class="progress-bar"></div>
-        <div class="progress-bar"></div>
-        <div class="progress-bar"></div>
-        <div class="progress-bar"></div>
-        <div class="progress-bar"></div>
-        <div class="progress-bar"></div>
+        <div class="progress-bar" v-for="(item, index) in realData[curFace].list" :key="index">{{item.problem}}</div>
       </div>
-      <div class="all-num">5435234</div>
+      <div class="all-num num">{{problems}}</div>
     </div>
   </div>
 
@@ -33,17 +34,36 @@
   export default {
     props: {
       realData: {
-        type: Object
+        type: Array
       }
     },
     data () {
       return {
-        showDefaultTable: true
+        showDefaultTable: true,
+        problems: 0,
+        curFace: 0
       }
+    },
+    mounted () {
+      this.problems = this.CountProblems(this.realData[this.curFace])
     },
     methods: {
       onChangeScale (flag) {
         this.showDefaultTable = !flag
+      },
+      onToggleFace (index) {
+        this.curFace = index
+        console.log(index)
+        this.problems = this.CountProblems(this.realData[index])
+      },
+      CountProblems (arr) {
+        let sum = 0
+        if (arr.list) {
+          arr.list.map((item, index) => {
+            sum += item.problem
+          })
+        }
+        return sum
       }
     },
     components: {
@@ -63,7 +83,11 @@
   .slide-fade-enter, .slide-fade-leave-to
     transform: translateX(10px)
     opacity: 0
-
+  @keyframes progressbar
+    from
+      width 0
+    to
+      width 100%
   .data
     height 373px
     background #011c39
@@ -80,17 +104,41 @@
         position absolute
         width: 316px
         left 215px
-        ul
+        .data-cases
           height 100%
           border-left: 1px solid #043465
-          li
+          .cases-title
+            color #03e4ff
+            font-size 24px
+            font-weight bold
             height 48px
             line-height 48px
-            color #5b9bdb
+            text-indent 15px
+            border-bottom: 1px solid #043465
+          .item
+            height 48px
+            line-height 48px
+            display flex
+            flex-direction row
             border-bottom: 1px solid #043465
             text-indent 15px
-            &:nth-of-type(1)
-              color #03e4ff
+            .title
+              width 100px
+              color #5a9cd8
+            .progress
+              height 16px
+              margin-top 16px
+              flex 0 0 100px
+              .fill
+                height 15px
+                display block
+                background #0b76e6
+                width 100px
+                transition width .8s ease
+                animation progressbar 7s
+            .count
+              color #fafd4d
+              font-size 25px
     .all-problem
       height 80px
       position absolute
@@ -126,7 +174,7 @@
       .all-num
         color: #d42723
         line-height 80px
-        font-size 25
+        font-size 25px
 
 
 
