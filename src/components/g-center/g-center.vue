@@ -1,17 +1,31 @@
 <template>
+  <!--中间大屏-->
   <div class="g-center">
+    <!--logo-->
     <div class="logo"></div>
+    <!--日期和时间-->
     <div class="date-wrap">
       <div class="date">{{`${year}.${month}.${day}`}}</div>
       <div class="time">{{`${hr}:${minu}:${sec}`}}</div>
     </div>
     <div class="g-wrap">
+      <!--案管中心-->
       <div class="g-case-area">
         <g-case-area></g-case-area>
       </div>
-      <div class="g-case-product"></div>
-      <div class="g-case-media"></div>
-      <div class="g-case-center"></div>
+      <!--涉案财物-->
+      <div class="g-case-product">
+        <g-case-product></g-case-product>
+      </div>
+      <!--执法视音频-->
+      <div class="g-case-media">
+        <g-case-media></g-case-media>
+      </div>
+      <!--办案中心-->
+      <div class="g-case-center">
+        <g-case-center></g-case-center>
+      </div>
+      <!--地图-->
       <div class="g-round-map"></div>
     </div>
   </div>
@@ -19,6 +33,9 @@
 
 <script type="text/ecmascript-6">
   import GCaseArea from 'components/g-case-area'
+  import GCaseProduct from 'components/g-case-product'
+  import GCaseMedia from 'components/g-case-media'
+  import GCaseCenter from 'components/g-case-center'
 
   export default {
     data () {
@@ -59,7 +76,10 @@
       }
     },
     components: {
-      GCaseArea
+      GCaseArea,
+      GCaseProduct,
+      GCaseMedia,
+      GCaseCenter
     }
   }
 </script>
