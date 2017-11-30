@@ -78,10 +78,10 @@
     height 55px
     background url(./title_bananzx.png) center 15px no-repeat
   .dept
-    width 480px
-    height 39px
+    width 533px
+    height 35px
     position absolute
-    right 0
+    right 17px
     top 80px
     background url(./linkbg.png) no-repeat
     select
@@ -89,13 +89,15 @@
       appearance: none
       border none
       outline none
-      color #fff
-      line-height 39px
+      color #93cafc
+      line-height 35px
       padding-left 10px
+      font-size 16px
       &:nth-of-type(1)
-        width 224px
+        width 254px
       &:nth-of-type(2)
-        width 235px
+        width 257px
+        margin-left 16px
   .dept-name
     width 566px
     height 35px

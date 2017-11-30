@@ -36,7 +36,9 @@
           <div class="item" @click="curChart=1" :class="{'active': curChart === 1}">涉案财物</div>
           <div class="item" @click="curChart=2" :class="{'active': curChart === 2}">音视频</div>
         </div>
-        <chart :options="grid" ref="grid"></chart>
+        <chart v-if="curChart===0" :options="grid1" ref="grid1"></chart>
+        <chart v-if="curChart===1" :options="grid2" ref="grid2"></chart>
+        <chart v-if="curChart===2" :options="grid3" ref="grid3"></chart>
       </div>
     </div>
   </div>
@@ -53,7 +55,7 @@
       return {
         curId: 0,
         curChart: 0,
-        grid: {
+        grid1: {
           tooltip: {
             trigger: 'axis'
           },
@@ -62,7 +64,7 @@
               color: '#fff'
             },
             y: 'bottom',
-            data: ['案管', '涉案财物', '音视频']
+            data: ['数字化数', '入柜管理数']
           },
           grid: {
             x: '1%',
@@ -93,7 +95,7 @@
           },
           series: [
             {
-              name: '案管',
+              name: '数字化数',
               type: 'line',
               stack: '总量',
               itemStyle: {
@@ -106,7 +108,7 @@
               data: [120, 132, 101, 134, 90, 230, 210, 290, 330, 120, 132, 101]
             },
             {
-              name: '涉案财物',
+              name: '入柜管理数',
               type: 'line',
               stack: '总量',
               itemStyle: {
@@ -117,19 +119,140 @@
                 }
               },
               data: [220, 191, 234, 290, 330, 120, 132, 101, 134, 90, 230, 210]
+            }
+          ]
+        },
+        grid2: {
+          tooltip: {
+            trigger: 'axis'
+          },
+          legend: {
+            textStyle: {
+              color: '#fff'
             },
+            y: 'bottom',
+            data: ['涉案财物采集及时率', '涉案财物采集处理率']
+          },
+          grid: {
+            x: '1%',
+            x2: '4%',
+            y: '5%',
+            y2: '15%',
+            containLabel: true
+          },
+          xAxis: {
+            type: 'category',
+            boundaryGap: false,
+            axisLabel: {
+              interval: 0,
+              color: '#fff'
+            },
+            data: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月']
+          },
+          yAxis: {
+            type: 'value',
+            axisLabel: {
+              color: '#fff'
+            },
+            splitLine: {
+              lineStyle: {
+                color: '#074076'
+              }
+            }
+          },
+          series: [
             {
-              name: '音视频',
+              name: '涉案财物采集及时率',
               type: 'line',
               stack: '总量',
               itemStyle: {
                 normal: {
                   lineStyle: {
-                    color: '#98d179'
+                    color: '#02e6fe'
                   }
                 }
               },
-              data: [101, 134, 90, 230, 210, 220, 182, 191, 234, 290, 330, 310]
+              data: [120, 132, 101, 134, 90, 230, 210, 290, 330, 120, 132, 101]
+            },
+            {
+              name: '涉案财物采集处理率',
+              type: 'line',
+              stack: '总量',
+              itemStyle: {
+                normal: {
+                  lineStyle: {
+                    color: '#3e8fd4'
+                  }
+                }
+              },
+              data: [220, 191, 234, 290, 330, 120, 132, 101, 134, 90, 230, 210]
+            }
+          ]
+        },
+        grid3: {
+          tooltip: {
+            trigger: 'axis'
+          },
+          legend: {
+            textStyle: {
+              color: '#fff'
+            },
+            y: 'bottom',
+            data: ['受立案数字化率', '受立案率']
+          },
+          grid: {
+            x: '1%',
+            x2: '4%',
+            y: '5%',
+            y2: '15%',
+            containLabel: true
+          },
+          xAxis: {
+            type: 'category',
+            boundaryGap: false,
+            axisLabel: {
+              interval: 0,
+              color: '#fff'
+            },
+            data: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月']
+          },
+          yAxis: {
+            type: 'value',
+            axisLabel: {
+              color: '#fff'
+            },
+            splitLine: {
+              lineStyle: {
+                color: '#074076'
+              }
+            }
+          },
+          series: [
+            {
+              name: '受立案数字化率',
+              type: 'line',
+              stack: '总量',
+              itemStyle: {
+                normal: {
+                  lineStyle: {
+                    color: '#02e6fe'
+                  }
+                }
+              },
+              data: [120, 132, 101, 134, 90, 230, 210, 290, 330, 120, 132, 101]
+            },
+            {
+              name: '受立案率',
+              type: 'line',
+              stack: '总量',
+              itemStyle: {
+                normal: {
+                  lineStyle: {
+                    color: '#3e8fd4'
+                  }
+                }
+              },
+              data: [220, 191, 234, 290, 330, 120, 132, 101, 134, 90, 230, 210]
             }
           ]
         }
@@ -144,7 +267,6 @@
       ])
     },
     methods: {
-
     },
     mounted () {
       this.$store.dispatch('GetRealDay')

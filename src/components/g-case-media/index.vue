@@ -61,7 +61,9 @@
       right 0
       top 55px
       video
-        width 418px
+        width 417px
+        padding-left 2px
+        box-sizing border-box
       .text
         position absolute
         bottom 0

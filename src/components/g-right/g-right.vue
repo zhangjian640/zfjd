@@ -157,5 +157,21 @@
         border-radius 5px
         background #00417d url(./icon_zhiban.png) center no-repeat
       .duty-msg
-        width 180px
+        width 450px
+        margin-top 6px
+        li
+          width 225px
+          padding-left 18px
+          box-sizing border-box
+          float left
+          color #6ba5df
+          font-size 18px
+          line-height 24px
+          .name
+            color #02e4ff
+            vertical-align middle
+          img
+            vertical-align middle
+            margin-left 10px
+            cursor pointer
 </style>

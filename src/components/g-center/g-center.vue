@@ -26,7 +26,9 @@
         <g-case-center></g-case-center>
       </div>
       <!--地图-->
-      <div class="g-round-map"></div>
+      <div class="g-round-map">
+        <g-round-map></g-round-map>
+      </div>
     </div>
   </div>
 </template>
@@ -36,6 +38,7 @@
   import GCaseProduct from 'components/g-case-product'
   import GCaseMedia from 'components/g-case-media'
   import GCaseCenter from 'components/g-case-center'
+  import GRoundMap from 'components/g-round-map'
 
   export default {
     data () {
@@ -79,7 +82,8 @@
       GCaseArea,
       GCaseProduct,
       GCaseMedia,
-      GCaseCenter
+      GCaseCenter,
+      GRoundMap
     }
   }
 </script>
@@ -136,4 +140,9 @@
       position absolute
       bottom 0
       right 0
+    .g-round-map
+      width 836px
+      height 836px
+      position absolute
+      left 545px
 </style>
