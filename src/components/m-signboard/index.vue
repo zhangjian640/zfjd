@@ -1,6 +1,5 @@
 <template>
-<div>
-  <h2>signboard</h2>
+<div class="signboard">
 </div>
 </template>
 
@@ -9,5 +8,4 @@
 </script>
 
 <style scoped lang="stylus" rel="stylesheet/stylus">
-
 </style>
